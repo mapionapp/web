@@ -1,24 +1,10 @@
 # w27-front
 
-## Project setup
-```
-yarn install
-```
+## Prerequisites
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+- Docker
+- Docker Compose
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## Development
 
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Just run `docker-compose up`. The dev server will listen on port 8080.
