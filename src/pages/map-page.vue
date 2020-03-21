@@ -36,8 +36,7 @@
     >
     </gmap-map>
 
-    <info-box v-if="isInfoBoxShown" v-on:close="isInfoBoxShown = false">
-    </info-box>
+    <info-box v-model="isInfoBoxShown" />
   </div>
 </template>
 
