@@ -39,6 +39,7 @@
     name: 'map-page',
     components: {FloatingCard},
     data: () => ({
+      mapLoaded: false,
       searchFocused: false,
       searchQuery: '',
       mapCenter: {lat: 50.6498903, lng: 11.0150288},
@@ -56,22 +57,32 @@
         handler(location) {
           if (location !== null && !this.mapLocationAcquired) {
             this.mapLocationAcquired = true
+            this.mapCenter = location
             this.mapZoom = location.accuracy < 500
               ? 12
               : 10
-            this.$refs.map.panTo(location)
+            this.updateMap()
           }
         }
       }
     },
+    async mounted() {
+      this.map = await this.$refs.map.$mapPromise
+      this.mapLoaded = true
+    },
     methods: {
+      updateMap() {
+        if (!this.mapLoaded) return
+        this.map.panTo(this.mapCenter)
+        this.map.setZoom(this.mapZoom)
+      },
       centerLocation() {
         if (this.$store.state.location !== null) {
           this.mapCenter = this.$store.state.location
-          this.$refs.map.panTo(this.$store.state.location)
           this.mapZoom = this.$store.state.location.accuracy < 500
             ? 12
             : 10
+          this.updateMap()
         }
       }
     }
