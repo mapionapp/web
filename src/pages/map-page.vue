@@ -78,20 +78,9 @@
         this.map.setZoom(this.mapZoom)
       },
       onTextFieldIconClick() {
-        const icons = {
-          center: 'center',
-          search: 'search'
-        }
-        const userHasTypedAQuery = !!this.searchQuery
-        const icon = userHasTypedAQuery ? icons.search : icons.center
-        switch(icon) {
-          case icons.center:
-            this.onCenterIconClicked()
-            break
-          case icons.search:
-            this.onSearchIconClicked()
-            break
-        }
+        this.searchQuery
+                ? this.onSearchIconClicked()
+                : this.onCenterIconClicked()
       },
       onSearchIconClicked() {
         // TODO Query the Google places API
