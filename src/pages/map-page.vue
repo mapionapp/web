@@ -9,6 +9,7 @@
         class="search-input"
         :class="{expanded: searchShouldExpand, mobile: $vuetify.breakpoint.smAndDown}"
         :append-icon="searchQuery ? 'mdi-magnify' : 'mdi-crosshairs-gps'"
+        @click:append="centerLocation"
         hide-details
         solo
         flat
@@ -32,6 +33,7 @@
 
 <script>
   import FloatingCard from '../components/floating-card'
+
   export default {
     name: 'map-page',
     components: {FloatingCard},
@@ -58,6 +60,16 @@
               ? 12
               : 10
           }
+        }
+      }
+    },
+    methods: {
+      centerLocation() {
+        if (this.$store.state.location !== null) {
+          this.mapCenter = this.$store.state.location
+          this.mapZoom = this.$store.state.location.accuracy < 500
+            ? 12
+            : 10
         }
       }
     }
