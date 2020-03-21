@@ -7,7 +7,7 @@
         @focus="searchFocused = true"
         @blur="searchFocused = false"
         class="search-input"
-        :class="{expanded: searchShouldExpand}"
+        :class="{expanded: searchShouldExpand, mobile: $vuetify.breakpoint.smAndDown}"
         :append-icon="searchQuery ? 'mdi-magnify' : 'mdi-crosshairs-gps'"
         hide-details
         solo
@@ -78,6 +78,10 @@
       &.expanded {
         width: 450px;
         padding: 8px;
+      }
+
+      &.mobile {
+        width: 100vw;
       }
     }
   }
