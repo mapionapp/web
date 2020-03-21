@@ -1,9 +1,6 @@
 <template>
   <div class="fill-height">
-    <floating-card
-      class="pa-1 search-bar"
-      :class="{ 'elevation-24': searchFocused }"
-    >
+    <floating-card class="pa-1 search-bar" :class="{'elevation-24': searchFocused}">
       <v-text-field
         v-model="searchQuery"
         placeholder="Standort suchen"
@@ -25,7 +22,7 @@
     <gmap-map
       class="map"
       ref="map"
-      :center="{ lat: 50.6498903, lng: 11.0150288 }"
+      :center="{lat: 50.6498903, lng: 11.0150288}"
       :zoom="mapZoom"
       :options="{
         mapTypeControl: false,
@@ -46,12 +43,12 @@
 
   export default {
     name: 'map-page',
-    components: { FloatingCard, InfoBox },
+    components: {FloatingCard, InfoBox},
     data: () => ({
       mapLoaded: false,
       searchFocused: false,
       searchQuery: '',
-      mapCenter: { lat: 50.6498903, lng: 11.0150288 },
+      mapCenter: {lat: 50.6498903, lng: 11.0150288},
       mapZoom: 6,
       mapLocationAcquired: false,
       isInfoBoxShown: false,
@@ -86,9 +83,7 @@
         this.map.setZoom(this.mapZoom)
       },
       onTextFieldIconClick() {
-        this.searchQuery
-          ? this.onSearchIconClicked()
-          : this.onCenterIconClicked()
+        this.searchQuery ? this.onSearchIconClicked() : this.onCenterIconClicked()
       },
       onSearchIconClicked() {
         // TODO Query the Google places API

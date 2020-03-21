@@ -6,7 +6,7 @@ const axios = BaseAxios.create({
 
 export class Api {
   static async getPlace(placeId) {
-    const { data } = await axios.get(`/v1/place/${placeId}`)
+    const {data} = await axios.get(`/v1/place/${placeId}`)
     return data
   }
 }
