@@ -10,8 +10,8 @@ export const store = new Vuex.Store({
   mutations: {
     setLocation(state, location) {
       state.location = location
-    }
+    },
   },
   actions: {},
-  modules: {}
+  modules: {},
 })

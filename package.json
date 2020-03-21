@@ -5,12 +5,16 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "format": "prettier --write \"**/*.{js,jsx,vue}\""
   },
   "dependencies": {
     "@mdi/font": "^3.6.95",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1",
     "register-service-worker": "^1.6.2",
     "roboto-fontface": "*",
     "vue": "^2.6.11",
@@ -40,6 +44,10 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
+    "*.{js,jsx,vue}": [
+      "prettier --write",
+      "git add"
+    ],
     "*.{js,jsx,vue}": [
       "vue-cli-service lint",
       "git add"
