@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-content>
-      <router-view/>
+      <router-view />
 
       <v-dialog v-model="initialDialogOpen">
         <v-card class="pa-3" color="red darken-1" dark>
@@ -28,10 +28,8 @@
             Einkäufe zu tätigen.
           </div>
 
-          <div class="my-3">
-            <a @click="initialDialogOpen = false" class="white--text"
-            ><strong>Klicke hier,</strong></a
-            > wenn du den Text gelesen hast.
+          <div class="text-center">
+            <v-btn @click="pressAcceptBtn" rounded color="primary" dark elevation="5">Gelesen und Akzeptiert</v-btn>
           </div>
         </v-card>
       </v-dialog>
@@ -45,5 +43,12 @@
     data: () => ({
       initialDialogOpen: true,
     }),
+    methods: {
+      pressAcceptBtn: function (event) {
+        if (event) {
+          this.initialDialogOpen = false
+        }
+      }
+    },
   }
 </script>
