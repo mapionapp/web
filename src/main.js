@@ -14,14 +14,14 @@ Vue.config.productionTip = false
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyDyZJW3scD0AU8qirs2cfALX9kg_ZKYxho',
-    libraries: 'places'
+    libraries: 'places',
   },
-  installComponents: true
+  installComponents: true,
 })
 
 new Vue({
   router,
   store,
   vuetify,
-  render: h => h(App)
+  render: h => h(App),
 }).$mount('#app')

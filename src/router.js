@@ -7,14 +7,14 @@ const routes = [
   {
     path: '/',
     name: 'index',
-    component: require('./pages/map-page').default
-  }
+    component: require('./pages/map-page').default,
+  },
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
 })
 
 export default router

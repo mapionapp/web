@@ -12,7 +12,7 @@
         class="search-input"
         :class="{
           expanded: searchShouldExpand,
-          mobile: $vuetify.breakpoint.smAndDown
+          mobile: $vuetify.breakpoint.smAndDown,
         }"
         :append-icon="searchQuery ? 'mdi-magnify' : 'mdi-crosshairs-gps'"
         @click:append="onSearchBarIconClick"
@@ -30,7 +30,7 @@
       :options="{
         mapTypeControl: false,
         streetViewControl: false,
-        fullscreenControl: false
+        fullscreenControl: false,
       }"
     >
     </gmap-map>
@@ -49,12 +49,12 @@
       searchQuery: '',
       mapCenter: { lat: 50.6498903, lng: 11.0150288 },
       mapZoom: 6,
-      mapLocationAcquired: false
+      mapLocationAcquired: false,
     }),
     computed: {
       searchShouldExpand() {
         return this.searchFocused || this.searchQuery
-      }
+      },
     },
     watch: {
       '$store.state.location': {
@@ -66,8 +66,8 @@
             this.mapZoom = location.accuracy < 500 ? 12 : 10
             this.updateMap()
           }
-        }
-      }
+        },
+      },
     },
     async mounted() {
       this.map = await this.$refs.map.$mapPromise
@@ -91,8 +91,8 @@
             this.updateMap()
           }
         }
-      }
-    }
+      },
+    },
   }
 </script>
 

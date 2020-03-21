@@ -14,7 +14,7 @@ export class GeolocationService {
     store.commit('setLocation', {
       lat: position.coords.latitude,
       lng: position.coords.longitude,
-      accuracy: position.coords.accuracy
+      accuracy: position.coords.accuracy,
     })
   }
 

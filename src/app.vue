@@ -11,6 +11,6 @@
     name: 'app',
     data: () => ({
       //
-    })
+    }),
   }
 </script>

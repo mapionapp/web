@@ -5,13 +5,13 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    location: null
+    location: null,
   },
   mutations: {
     setLocation(state, location) {
       state.location = location
-    }
+    },
   },
   actions: {},
-  modules: {}
+  modules: {},
 })

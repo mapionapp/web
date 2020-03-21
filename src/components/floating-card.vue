@@ -9,7 +9,7 @@
 
 <script>
   export default {
-    name: 'floating-card'
+    name: 'floating-card',
   }
 </script>
 
