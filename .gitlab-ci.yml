@@ -16,7 +16,10 @@ build:
 
 pages:
   stage: deploy
+  dependencies:
+    - build
   script:
+    - mv public .public
     - mv dist public
   artifacts:
     paths:
