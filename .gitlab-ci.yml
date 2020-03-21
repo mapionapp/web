@@ -14,7 +14,7 @@ build:
       - dist
     when: on_success
 
-deploy:
+pages:
   stage: deploy
   script:
     - mv dist public
