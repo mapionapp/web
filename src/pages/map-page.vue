@@ -15,7 +15,7 @@
           mobile: $vuetify.breakpoint.smAndDown,
         }"
         :append-icon="searchQuery ? 'mdi-magnify' : 'mdi-crosshairs-gps'"
-        @click:append="onSearchBarIconClick"
+        @click:append="onTextFieldIconClick"
         hide-details
         solo
         flat
@@ -80,18 +80,26 @@
         this.map.panTo(this.mapCenter)
         this.map.setZoom(this.mapZoom)
       },
-      onSearchBarIconClick() {
-        if (this.searchQuery) {
-          // Query the places API
-          // TODO
+      onTextFieldIconClick() {
+        this.searchQuery
+          ? this.onSearchIconClicked()
+          : this.onCenterIconClicked()
+      },
+      onSearchIconClicked() {
+        // TODO Query the Google places API
+      },
+      onCenterIconClicked() {
+        const userDeniedGeolocation = this.$store.state.location !== null
+        if (!userDeniedGeolocation) {
+          this.centerLocation()
         } else {
-          // GPS/Position search
-          if (this.$store.state.location !== null) {
-            this.mapCenter = this.$store.state.location
-            this.mapZoom = this.$store.state.location.accuracy < 500 ? 12 : 10
-            this.updateMap()
-          }
+          // TODO Not possible to prompt user for his location a second time, need to show a tutorial
         }
+      },
+      centerLocation() {
+        this.mapCenter = this.$store.state.location
+        this.mapZoom = this.$store.state.location.accuracy < 500 ? 12 : 10
+        this.updateMap()
       },
     },
   }
