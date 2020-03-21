@@ -127,6 +127,10 @@
     }
   }
 
+  .fill-height {
+    height: 100%;
+  }
+
   .map {
     z-index: 0;
     width: 100%;
