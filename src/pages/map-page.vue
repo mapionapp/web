@@ -69,6 +69,7 @@
     async mounted() {
       this.map = await this.$refs.map.$mapPromise
       this.mapLoaded = true
+      this.updateMap()
     },
     methods: {
       updateMap() {
