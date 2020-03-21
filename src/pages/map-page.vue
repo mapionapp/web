@@ -32,7 +32,7 @@
         streetViewControl: false,
         fullscreenControl: false,
       }"
-      @click="onClick"
+      @click="isInfoBoxShown = true"
     >
     </gmap-map>
 
@@ -106,10 +106,6 @@
         this.mapCenter = this.$store.state.location
         this.mapZoom = this.$store.state.location.accuracy < 500 ? 12 : 10
         this.updateMap()
-      },
-      onClick() {
-        console.log('hello')
-        this.isInfoBoxShown = true
       },
     },
   }
