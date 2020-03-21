@@ -94,8 +94,8 @@
         // TODO Query the Google places API
       },
       onCenterIconClicked() {
-        const userDeniedGeolocation = this.$store.state.location !== null
-        if (!userDeniedGeolocation) {
+        const userAllowedGeolocation = this.$store.state.location !== null
+        if (userAllowedGeolocation) {
           this.centerLocation()
         } else {
           // TODO Not possible to prompt user for his location a second time, need to show a tutorial
