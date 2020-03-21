@@ -1,9 +1,12 @@
-import {store} from '../store'
+import { store } from '../store'
 
 export class GeolocationService {
   constructor() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this._locationUpdated, this._errorHandler)
+      navigator.geolocation.getCurrentPosition(
+        this._locationUpdated,
+        this._errorHandler
+      )
     }
   }
 
@@ -11,12 +14,12 @@ export class GeolocationService {
     store.commit('setLocation', {
       lat: position.coords.latitude,
       lng: position.coords.longitude,
-      accuracy: position.coords.accuracy,
+      accuracy: position.coords.accuracy
     })
   }
 
   _errorHandler(error) {
-    console.warn(`ERROR(${error.code}): ${error.message}`);
+    console.warn(`ERROR(${error.code}): ${error.message}`)
     store.commit('setLocation', null)
   }
 }

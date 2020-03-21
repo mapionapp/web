@@ -8,7 +8,7 @@ const routes = [
     path: '/',
     name: 'index',
     component: require('./pages/map-page').default
-  },
+  }
 ]
 
 const router = new VueRouter({
