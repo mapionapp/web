@@ -32,17 +32,21 @@
         streetViewControl: false,
         fullscreenControl: false,
       }"
+      @click="isInfoBoxShown = true"
     >
     </gmap-map>
+
+    <info-box v-model="isInfoBoxShown" />
   </div>
 </template>
 
 <script>
   import FloatingCard from '../components/floating-card'
+  import InfoBox from '../components/info-box'
 
   export default {
     name: 'map-page',
-    components: { FloatingCard },
+    components: { FloatingCard, InfoBox },
     data: () => ({
       mapLoaded: false,
       searchFocused: false,
@@ -50,6 +54,7 @@
       mapCenter: { lat: 50.6498903, lng: 11.0150288 },
       mapZoom: 6,
       mapLocationAcquired: false,
+      isInfoBoxShown: false,
     }),
     computed: {
       searchShouldExpand() {
