@@ -8,24 +8,24 @@
           <h1>Bevor Du loslegst...</h1>
 
           <div class="my-3">
-            Dies ist eine Webseite, die jeder und jedem in unserer Gesellschaft
-            den Zugang zu notwendigen Gütern in dieser schwierigen Zeit
-            erleichtern soll. Diese Webseite ist <strong>kein</strong> Ort, um
-            Hamsterkäufe zu planen.
+            Dies ist eine Webseite, die jeder und jedem in unserer Gesellschaft den Zugang zu notwendigen Gütern in
+            dieser schwierigen Zeit erleichtern soll. Diese Webseite ist <strong>kein</strong> Ort, um Hamsterkäufe zu
+            planen.
           </div>
 
           <h3>
             Der Einzelhandel bleibt geöffnet und die Lieferketten bestmöglich aufrechterhalten. (<a
-            class="white--text"
-            target="_blank"
-            href="https://www.bundesregierung.de/breg-de/aktuelles/vereinbarung-zwischen-der-bundesregierung-und-den-regierungschefinnen-und-regierungschefs-der-bundeslaender-angesichts-der-corona-epidemie-in-deutschland-1730934"
-          >Meldung der Bundesregierung</a>)</h3>
+              class="white--text"
+              target="_blank"
+              href="https://www.bundesregierung.de/breg-de/aktuelles/vereinbarung-zwischen-der-bundesregierung-und-den-regierungschefinnen-und-regierungschefs-der-bundeslaender-angesichts-der-corona-epidemie-in-deutschland-1730934"
+              >Meldung der Bundesregierung</a
+            >)
+          </h3>
 
           <div class="my-4">
-            Das funktioniert nur, wenn <strong> jede und jeder mithilft</strong>, indem er/sie
-            nur in angemessenem Maße einkauft. Bitte denke beim Einkaufen auch
-            an Menschen, denen es derzeit nur erschwert möglich ist, ihre
-            Einkäufe zu tätigen.
+            Das funktioniert nur, wenn
+            <strong> jede und jeder mithilft</strong>, indem er/sie angemessenem Maße einkauft. Bitte denke beim
+            Einkaufen auch Menschen, denen es derzeit nur erschwert möglich ist, ihre Einkäufe tätigen.
           </div>
 
           <div class="text-center">
@@ -44,11 +44,11 @@
       initialDialogOpen: true,
     }),
     methods: {
-      pressAcceptBtn: function (event) {
+      pressAcceptBtn: function(event) {
         if (event) {
           this.initialDialogOpen = false
         }
-      }
+      },
     },
   }
 </script>
