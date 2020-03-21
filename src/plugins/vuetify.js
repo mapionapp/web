@@ -1,14 +1,14 @@
-import Vue from 'vue';
-import Vuetify from 'vuetify/lib';
-import de from 'vuetify/es5/locale/de';
+import Vue from 'vue'
+import Vuetify from 'vuetify/lib'
+import de from 'vuetify/es5/locale/de'
 
-Vue.use(Vuetify);
+Vue.use(Vuetify)
 
 export default new Vuetify({
   theme: {
-      options: {
-        customProperties: true,
-      },
+    options: {
+      customProperties: true,
+    },
     themes: {
       light: {
         primary: '#b71c1c',
@@ -21,8 +21,8 @@ export default new Vuetify({
       },
     },
   },
-    lang: {
-      locales: { de },
-      current: 'de',
-    },
-});
+  lang: {
+    locales: {de},
+    current: 'de',
+  },
+})
