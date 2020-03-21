@@ -7,7 +7,8 @@
 
 ## Development
 1. Install [Docker](https://www.docker.com/)
-2. Start Docker application
+2. Start Docker application (only on macOS and Windows. On Linux make sure `dockerd` is running)
+3. Copy `.env.example` to `.env` and make the appropriate changes (fill in API keys etc.)
 3. Run `docker-compose up`
 
 > This will start a local development server on port 8080 in the Docker container.
