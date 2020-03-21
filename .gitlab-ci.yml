@@ -1,0 +1,14 @@
+image: node:alpine
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - yarn install
+    - yarn build
+  artifacts:
+    paths:
+      - ./dist
+    when: on_success
