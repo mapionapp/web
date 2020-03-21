@@ -9,7 +9,7 @@
         class="search-input"
         :class="{expanded: searchShouldExpand, mobile: $vuetify.breakpoint.smAndDown}"
         :append-icon="searchQuery ? 'mdi-magnify' : 'mdi-crosshairs-gps'"
-        @click:append="onSearchBarIconClick"
+        @click:append="onTextFieldIconClick"
         hide-details
         solo
         flat
@@ -77,18 +77,39 @@
         this.map.panTo(this.mapCenter)
         this.map.setZoom(this.mapZoom)
       },
-      onSearchBarIconClick() {
-        if (this.searchQuery) { // Query the places API
-          // TODO
-        } else { // GPS/Position search
-          if (this.$store.state.location !== null) {
-            this.mapCenter = this.$store.state.location
-            this.mapZoom = this.$store.state.location.accuracy < 500
-              ? 12
-              : 10
-            this.updateMap()
-          }
+      onTextFieldIconClick() {
+        const icons = {
+          center: 'center',
+          search: 'search'
         }
+        const userHasTypedAQuery = !!this.searchQuery
+        const icon = userHasTypedAQuery ? icons.search : icons.center
+        switch(icon) {
+          case icons.center:
+            this.onCenterIconClicked()
+            break
+          case icons.search:
+            this.onSearchIconClicked()
+            break
+        }
+      },
+      onSearchIconClicked() {
+        // TODO Query the Google places API
+      },
+      onCenterIconClicked() {
+        const userDeniedGeolocation = this.$store.state.location !== null
+        if (!userDeniedGeolocation) {
+          this.centerLocation()
+        } else {
+          // TODO Not possible to prompt user for his location a second time, need to show a tutorial
+        }
+      },
+      centerLocation(){
+        this.mapCenter = this.$store.state.location
+        this.mapZoom = this.$store.state.location.accuracy < 500
+                ? 12
+                : 10
+        this.updateMap()
       }
     }
   }
