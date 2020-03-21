@@ -18,7 +18,8 @@
 
     <gmap-map
       class="map"
-      :center="mapCenter"
+      ref="map"
+      :center="{lat: 50.6498903, lng: 11.0150288}"
       :zoom="mapZoom"
       :options="{
         mapTypeControl: false,
@@ -55,10 +56,10 @@
         handler(location) {
           if (location !== null && !this.mapLocationAcquired) {
             this.mapLocationAcquired = true
-            this.mapCenter = location
             this.mapZoom = location.accuracy < 500
               ? 12
               : 10
+            this.$refs.map.panTo(location)
           }
         }
       }
@@ -67,6 +68,7 @@
       centerLocation() {
         if (this.$store.state.location !== null) {
           this.mapCenter = this.$store.state.location
+          this.$refs.map.panTo(this.$store.state.location)
           this.mapZoom = this.$store.state.location.accuracy < 500
             ? 12
             : 10
