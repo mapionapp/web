@@ -1,13 +1,19 @@
 <template>
   <div class="fill-height">
-    <floating-card class="pa-1 search-bar" :class="{'elevation-24': searchFocused}">
+    <floating-card
+      class="pa-1 search-bar"
+      :class="{ 'elevation-24': searchFocused }"
+    >
       <v-text-field
         v-model="searchQuery"
         placeholder="Standort suchen"
         @focus="searchFocused = true"
         @blur="searchFocused = false"
         class="search-input"
-        :class="{expanded: searchShouldExpand, mobile: $vuetify.breakpoint.smAndDown}"
+        :class="{
+          expanded: searchShouldExpand,
+          mobile: $vuetify.breakpoint.smAndDown,
+        }"
         :append-icon="searchQuery ? 'mdi-magnify' : 'mdi-crosshairs-gps'"
         @click:append="onSearchBarIconClick"
         hide-details
@@ -19,7 +25,7 @@
     <gmap-map
       class="map"
       ref="map"
-      :center="{lat: 50.6498903, lng: 11.0150288}"
+      :center="{ lat: 50.6498903, lng: 11.0150288 }"
       :zoom="mapZoom"
       :options="{
         mapTypeControl: false,
@@ -27,7 +33,6 @@
         fullscreenControl: false,
       }"
     >
-
     </gmap-map>
   </div>
 </template>
@@ -37,19 +42,19 @@
 
   export default {
     name: 'map-page',
-    components: {FloatingCard},
+    components: { FloatingCard },
     data: () => ({
       mapLoaded: false,
       searchFocused: false,
       searchQuery: '',
-      mapCenter: {lat: 50.6498903, lng: 11.0150288},
+      mapCenter: { lat: 50.6498903, lng: 11.0150288 },
       mapZoom: 6,
       mapLocationAcquired: false,
     }),
     computed: {
       searchShouldExpand() {
         return this.searchFocused || this.searchQuery
-      }
+      },
     },
     watch: {
       '$store.state.location': {
@@ -58,13 +63,11 @@
           if (location !== null && !this.mapLocationAcquired) {
             this.mapLocationAcquired = true
             this.mapCenter = location
-            this.mapZoom = location.accuracy < 500
-              ? 12
-              : 10
+            this.mapZoom = location.accuracy < 500 ? 12 : 10
             this.updateMap()
           }
-        }
-      }
+        },
+      },
     },
     async mounted() {
       this.map = await this.$refs.map.$mapPromise
@@ -78,24 +81,24 @@
         this.map.setZoom(this.mapZoom)
       },
       onSearchBarIconClick() {
-        if (this.searchQuery) { // Query the places API
+        if (this.searchQuery) {
+          // Query the places API
           // TODO
-        } else { // GPS/Position search
+        } else {
+          // GPS/Position search
           if (this.$store.state.location !== null) {
             this.mapCenter = this.$store.state.location
-            this.mapZoom = this.$store.state.location.accuracy < 500
-              ? 12
-              : 10
+            this.mapZoom = this.$store.state.location.accuracy < 500 ? 12 : 10
             this.updateMap()
           }
         }
-      }
-    }
+      },
+    },
   }
 </script>
 
 <style lang="scss" scoped>
-  @import "../style/variables";
+  @import '../style/variables';
 
   .search-bar {
     z-index: 1;
