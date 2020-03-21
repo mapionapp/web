@@ -3,8 +3,8 @@
     <v-content>
       <router-view />
 
-      <v-dialog v-model="initialDialogOpen">
-        <v-card class="pa-3" color="red darken-1" dark>
+      <v-dialog v-model="initialDialogOpen" max-width="500px">
+        <v-card class="pa-5" color="red darken-1" dark>
           <h1>Bevor Du loslegst...</h1>
 
           <div class="my-3">
@@ -29,7 +29,7 @@
           </div>
 
           <div class="text-center">
-            <v-btn @click="pressAcceptBtn" rounded color="primary" dark elevation="5">Gelesen und Akzeptiert</v-btn>
+            <v-btn @click="pressAcceptBtn" rounded color="primary" dark depressed>Gelesen und Akzeptiert</v-btn>
           </div>
         </v-card>
       </v-dialog>
