@@ -16,6 +16,7 @@
         }"
         :append-icon="searchQuery ? 'mdi-magnify' : 'mdi-crosshairs-gps'"
         @click:append="onTextFieldIconClick"
+        @keyup.enter="onTextFieldEnter"
         hide-details
         solo
         flat
@@ -39,6 +40,7 @@
 
 <script>
   import FloatingCard from '../components/floating-card'
+  import { Api } from '../lib/Api'
 
   export default {
     name: 'map-page',
@@ -47,7 +49,7 @@
       mapLoaded: false,
       searchFocused: false,
       searchQuery: '',
-      mapCenter: { lat: 50.6498903, lng: 11.0150288 },
+      mapCenter: { lat: 50.6498903, lng: 11.0150288 }, // This is where user has scrolled to, not his actual position
       mapZoom: 6,
       mapLocationAcquired: false,
     }),
@@ -85,8 +87,25 @@
           ? this.onSearchIconClicked()
           : this.onCenterIconClicked()
       },
+      onTextFieldEnter() {
+        this.searchForQuery()
+      },
       onSearchIconClicked() {
-        // TODO Query the Google places API
+        this.searchForQuery()
+      },
+      async searchForQuery() {
+        const search = this.searchQuery.trim()
+        if (search) {
+          const data = await Api.nearbyPlaces({
+            keyword: search,
+            location: {
+              longitude: this.mapCenter.lng,
+              latitude: this.mapCenter.lat,
+            },
+          })
+          // data has .next_page_token if there are too many results
+          console.log(data) // TODO What to do with data?
+        }
       },
       onCenterIconClicked() {
         const userAllowedGeolocation = this.$store.state.location !== null
