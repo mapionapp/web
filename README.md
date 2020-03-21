@@ -6,24 +6,35 @@
   - [Work](#work)
 
 ## Development
-1. Install [Docker](https://www.docker.com/)
-2. Start Docker application (only on macOS and Windows. On Linux make sure `dockerd` is running)
-3. Copy `.env.example` to `.env` and make the appropriate changes (fill in API keys etc.)
-3. Run `docker-compose up`
+1. Don't run `npm install` or `yarn install`
+2. Install [Docker](https://www.docker.com/)
+3. Start Docker application (only on macOS and Windows. On Linux make sure `dockerd` is running)
+4. Copy `.env.example` to `.env` and make the appropriate changes (fill in API keys etc.)
+5. Run `docker-compose up`
 
 > This will start a local development server on port 8080 in the Docker container.
 
+
 ### Shell
-To e.g. install npm packages inside the Docker container and in your project, you have to start a shell in the Docker container with: `docker-compose exec <service> <command>`.
+
+*Install npm packages and run npm scripts*
+
+You have to start a shell in the Docker container: `docker-compose exec <service> <command>`. 
 
 > `<service>` can be found in the "docker-compose.yml" file. Currently the service name is "ui".
 
-If you want to install the "moment" npm package:
+Install npm packages e.g. the "moment" npm package:
 - `docker-compose exec ui yarn add moment`
+
+Run our npm script to format the project with prettier:
+- `docker-compose exec ui yarn run format`
 
 If you want to have a persistent shell:
 - `docker-compose exec ui sh`
+
+With a persistent shell you can use your shell like normal
 - `yarn add moment`
+- `yarn run format`
 
 ### Work
 - You can track your work in our [Project](https://github.com/wirvsvirus-27/w27-front/projects/1) 
