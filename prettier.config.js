@@ -5,7 +5,7 @@ module.exports = {
   useTabs: false,
   semi: false,
   singleQuote: true,
-  trailingComma: 'none',
+  trailingComma: 'es5',
   bracketSpacing: true,
   jsxBracketSameLine: false,
   arrowParens: 'avoid',
@@ -13,5 +13,5 @@ module.exports = {
   rangeEnd: Infinity,
   requirePragma: false,
   insertPragma: false,
-  proseWrap: 'preserve'
+  proseWrap: 'preserve',
 }
