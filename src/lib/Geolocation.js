@@ -3,7 +3,7 @@ import {store} from '../store'
 export class GeolocationService {
   constructor() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this._locationUpdated, this._errorHandler)
+      navigator.geolocation.watchPosition(this._locationUpdated, this._errorHandler)
     }
   }
 
