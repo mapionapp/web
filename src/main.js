@@ -8,12 +8,13 @@ import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@mdi/font/css/materialdesignicons.css'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import './lib/Geolocation'
+import { googleApiKey } from './lib/Api'
 
 Vue.config.productionTip = false
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyDyZJW3scD0AU8qirs2cfALX9kg_ZKYxho',
+    key: googleApiKey,
     libraries: 'places',
   },
   installComponents: true,
