@@ -9,7 +9,7 @@
         class="search-input"
         :class="{expanded: searchShouldExpand, mobile: $vuetify.breakpoint.smAndDown}"
         :append-icon="searchQuery ? 'mdi-magnify' : 'mdi-crosshairs-gps'"
-        @click:append="centerLocation"
+        @click:append="onSearchBarIconClick"
         hide-details
         solo
         flat
@@ -76,13 +76,17 @@
         this.map.panTo(this.mapCenter)
         this.map.setZoom(this.mapZoom)
       },
-      centerLocation() {
-        if (this.$store.state.location !== null) {
-          this.mapCenter = this.$store.state.location
-          this.mapZoom = this.$store.state.location.accuracy < 500
-            ? 12
-            : 10
-          this.updateMap()
+      onSearchBarIconClick() {
+        if (this.searchQuery) { // Query the places API
+          // TODO
+        } else { // GPS/Position search
+          if (this.$store.state.location !== null) {
+            this.mapCenter = this.$store.state.location
+            this.mapZoom = this.$store.state.location.accuracy < 500
+              ? 12
+              : 10
+            this.updateMap()
+          }
         }
       }
     }
