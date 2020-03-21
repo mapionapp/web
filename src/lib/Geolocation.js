@@ -17,9 +17,9 @@ export class GeolocationService {
 
   _errorHandler(error) {
     console.warn(`ERROR(${error.code}): ${error.message}`);
-    store.commit('setLocation', null)
+    store.commit('setLocation', null);
   }
 }
 
 // Start the service
-new GeolocationService()
+new GeolocationService();
