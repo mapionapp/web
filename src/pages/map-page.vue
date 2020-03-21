@@ -32,11 +32,11 @@
         streetViewControl: false,
         fullscreenControl: false,
       }"
-      @click="isInfoBoxShown = true"
+      @click="onClick"
     >
     </gmap-map>
 
-    <info-box v-model="isInfoBoxShown" />
+    <info-box v-model="isInfoBoxShown" v-bind:placeId="currentPlaceId" />
   </div>
 </template>
 
@@ -55,6 +55,7 @@
       mapZoom: 6,
       mapLocationAcquired: false,
       isInfoBoxShown: false,
+      currentPlaceId: '',
     }),
     computed: {
       searchShouldExpand() {
@@ -105,6 +106,12 @@
         this.mapCenter = this.$store.state.location
         this.mapZoom = this.$store.state.location.accuracy < 500 ? 12 : 10
         this.updateMap()
+      },
+      onClick(data) {
+        if (data.placeId) {
+          this.currentPlaceId = data.placeId
+          this.isInfoBoxShown = true
+        }
       },
     },
   }

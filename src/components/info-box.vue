@@ -31,7 +31,7 @@
 <script>
   export default {
     name: 'info-box',
-    props: ['title', 'value'],
+    props: ['title', 'value', 'placeId'],
     methods: {},
   }
 </script>
