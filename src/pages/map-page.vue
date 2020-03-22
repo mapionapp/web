@@ -1,14 +1,6 @@
 <template>
   <div class="fill-height">
-    <autocomplete
-      :icon="autocompleteSearch ? 'mdi-magnify' : 'mdi-crosshairs-gps'"
-      :isLoading="autocompleteIsLoading"
-      :suggestions="autocompleteSuggestions"
-      @suggestionSelected="onAutocompleteSuggestionSelected"
-      @searchChanged="onAutocompleteSearchChanged"
-      @iconClicked="onAutocompleteIconClicked"
-      label="Standort suchen"
-    ></autocomplete>
+    <places-search></places-search>
 
     <gmap-map
       class="map"
@@ -30,15 +22,12 @@
 
 <script>
   import InfoBox from '../components/info-box'
-  import Autocomplete from '../components/autocomplete'
+  import PlacesSearch from '../components/places-search'
 
   export default {
     name: 'map-page',
-    components: { InfoBox, Autocomplete },
+    components: { InfoBox, PlacesSearch },
     data: () => ({
-      autocompleteIsLoading: false,
-      autocompleteSuggestions: [],
-      autocompleteSearch: null,
       mapLoaded: false,
       mapCenter: { lat: 50.6498903, lng: 11.0150288 },
       mapZoom: 6,
@@ -68,41 +57,6 @@
         if (!this.mapLoaded) return
         this.map.panTo(this.mapCenter)
         this.map.setZoom(this.mapZoom)
-      },
-      onAutocompleteSuggestionSelected(e) {
-        console.log(e)
-      },
-      onAutocompleteIconClicked() {
-        this.searchQuery
-          ? this.onSearchIconClicked()
-          : this.onCenterIconClicked()
-      },
-      onAutocompleteSearchChanged(e) {
-        this.autocompleteSearch = e
-        console.log(e)
-      },
-      onSearchIconClicked() {
-        // TODO Select the first suggestion
-        this.searchForQuery()
-      },
-      async searchForQuery() {
-        const search = this.searchQuery.trim()
-        if (search) {
-          // TODO Call Api -> Don't allow arbitrary searches, only if a suggestion was selected
-        }
-      },
-      onCenterIconClicked() {
-        const userAllowedGeolocation = this.$store.state.location !== null
-        if (userAllowedGeolocation) {
-          this.centerLocation()
-        } else {
-          // TODO Not possible to prompt user for his location a second time, need to show a tutorial
-        }
-      },
-      centerLocation() {
-        this.mapCenter = this.$store.state.location
-        this.mapZoom = this.$store.state.location.accuracy < 500 ? 12 : 10
-        this.updateMap()
       },
     },
   }

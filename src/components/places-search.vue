@@ -5,21 +5,19 @@
   >
     <v-autocomplete
       v-model="select"
-      :loading="loading"
-      :items="items"
       :search-input.sync="search"
-      :append-icon="icon"
-      :label="label"
+      :loading="loading"
+      :items="suggestions"
+      :append-icon="search ? 'mdi-magnify' : 'mdi-crosshairs-gps'"
       :class="{
         expanded: searchShouldExpand,
         mobile: $vuetify.breakpoint.smAndDown,
       }"
-      @input="onInput"
-      @keyup="onKeyUp"
       @click:append="onIconClick"
       @focus="searchFocused = true"
       @blur="searchFocused = false"
       class="mx-4 autocomplete"
+      label="Standort suchen"
       cache-items
       flat
       hide-no-data
@@ -31,15 +29,16 @@
 
 <script>
   import FloatingCard from '../components/floating-card'
-  // TODO Try search function as an input
+  import { Api } from '../lib/Api'
+
   export default {
     name: 'info-box',
     components: { FloatingCard },
-    props: ['label', 'suggestions', 'isLoading', 'icon'],
     data() {
       return {
+        isLoading: false,
         searchFocused: false,
-        items: [], // can be {text, value}
+        suggestions: [], // can be {text, value}
         loading: false,
         search: null,
         select: null,
@@ -47,29 +46,46 @@
     },
     computed: {
       searchShouldExpand() {
-        return this.searchFocused || this.searchQuery
+        return this.searchFocused || this.search
       },
     },
     watch: {
-      search(val) {
-        val && val !== this.select && this.querySelections(val)
+      search(v) {
+        v && v !== this.select && this.updateSuggestions(v) // TODO Check if select === search should be prevented elsewhere
+      },
+      select(v) {
+        console.log(v)
       },
     },
     methods: {
-      querySelections(v) {
+      async updateSuggestions(v) {
+        if (!v.trim()) {
+          return
+        }
         this.loading = true
-        this.items = this.suggestions.filter(
-          e => (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
-        )
-      },
-      onInput(e) {
-        this.$emit('suggestionSelected', e)
-      },
-      onKeyUp() {
-        this.$emit('searchChanged', this.search)
+        this.suggestions = await Api.getPlaceSuggestions(v.trim())
+        this.loading = false
       },
       onIconClick() {
-        this.$emit('iconClicked', this.icon)
+        this.search ? this.onSearchIconClicked() : this.onCenterIconClicked()
+      },
+      async onSearchIconClicked() {
+        await this.updateSuggestions()
+        this.select = this.suggestions.length > 0 ? this.suggestions[0] : null
+        // TODO Update store?
+      },
+      onCenterIconClicked() {
+        const userAllowedGeolocation = this.$store.state.location !== null
+        if (userAllowedGeolocation) {
+          this.centerLocation()
+        } else {
+          // TODO Not possible to prompt user for his location a second time, need to show a tutorial
+        }
+      },
+      centerLocation() {
+        this.mapCenter = this.$store.state.location
+        this.mapZoom = this.$store.state.location.accuracy < 500 ? 12 : 10
+        this.updateMap()
       },
     },
   }
