@@ -1,8 +1,5 @@
 <template>
-  <v-card
-    class="floating-card"
-    :class="{ mobile: $vuetify.breakpoint.smAndDown }"
-  >
+  <v-card id="floating-card" :class="{ mobile: $vuetify.breakpoint.smAndDown }">
     <slot />
   </v-card>
 </template>
@@ -14,8 +11,9 @@
 </script>
 
 <style lang="scss" scoped>
-  .floating-card {
+  #floating-card {
     position: fixed;
+    padding: 0 !important;
     top: 32px;
     left: 32px;
 

@@ -1,7 +1,7 @@
 <template>
   <div class="fill-height">
     <autocomplete
-      :icon="searchQuery ? 'mdi-magnify' : 'mdi-crosshairs-gps'"
+      :icon="autocompleteSearch ? 'mdi-magnify' : 'mdi-crosshairs-gps'"
       :isLoading="autocompleteIsLoading"
       :suggestions="autocompleteSuggestions"
       @suggestionSelected="onAutocompleteSuggestionSelected"
@@ -38,6 +38,7 @@
     data: () => ({
       autocompleteIsLoading: false,
       autocompleteSuggestions: [],
+      autocompleteSearch: null,
       mapLoaded: false,
       mapCenter: { lat: 50.6498903, lng: 11.0150288 },
       mapZoom: 6,
@@ -77,6 +78,7 @@
           : this.onCenterIconClicked()
       },
       onAutocompleteSearchChanged(e) {
+        this.autocompleteSearch = e
         console.log(e)
       },
       onSearchIconClicked() {

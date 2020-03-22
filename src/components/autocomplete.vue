@@ -19,20 +19,22 @@
       @click:append="onIconClick"
       @focus="searchFocused = true"
       @blur="searchFocused = false"
-      class="mx-4 search-input"
+      class="mx-4 autocomplete"
       cache-items
       flat
       hide-no-data
       hide-details
-      solo-inverted
+      solo
     ></v-autocomplete>
   </floating-card>
 </template>
 
 <script>
+  import FloatingCard from '../components/floating-card'
   // TODO Try search function as an input
   export default {
     name: 'info-box',
+    components: { FloatingCard },
     props: ['label', 'suggestions', 'isLoading', 'icon'],
     data() {
       return {
@@ -73,24 +75,30 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import '../style/variables';
 
   .search-bar {
     z-index: 1;
 
-    .search-input {
+    .autocomplete {
       width: 350px;
       padding: 0;
-      transition: width 400ms $animation-curve, padding 400ms $animation-curve;
+      margin: 0 !important;
+      transition: transform 400ms;
 
       &.expanded {
-        width: 450px;
-        padding: 8px;
+        // transform: scale(1.1);
+        // transform-origin: top left;
       }
 
       &.mobile {
         width: 100vw;
+      }
+
+      &.v-select.v-select--is-menu-active .v-input__icon--append .v-icon {
+        -webkit-transform: none !important;
+        transform: none !important;
       }
     }
   }
