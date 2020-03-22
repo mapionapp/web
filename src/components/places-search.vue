@@ -55,7 +55,7 @@
       },
     },
     methods: {
-      updateSuggestions: throttle(async search => {
+      updateSuggestions: throttle(async function(search) {
         if (!search.trim() || (this.selectedSuggestion && this.selectedSuggestion.text === search)) {
           return
         }
