@@ -1,7 +1,7 @@
 <template>
   <floating-card class="pa-1 search-bar" :class="{'elevation-24': searchFocused}">
     <v-autocomplete
-      v-model="select"
+      v-model="selectedSuggestion"
       :search-input.sync="search"
       :loading="loading"
       :items="suggestions"
@@ -33,12 +33,11 @@
     components: {FloatingCard},
     data() {
       return {
-        isLoading: false,
+        suggestions: [],
+        selectedSuggestion: null,
         searchFocused: false,
-        suggestions: [], // can be {text, value}
         loading: false,
         search: null,
-        select: null,
       }
     },
     computed: {
@@ -47,25 +46,24 @@
       },
     },
     watch: {
-      search(v) {
-        v && v !== this.select && this.updateSuggestions(v) // TODO Check if select === search should be prevented elsewhere
+      search(search) {
+        search && this.updateSuggestions(search)
       },
-      select(v) {
-        console.log(v)
+      select(selectedSuggestion) {
+        this.$store.commit('setSelectedPlace', selectedSuggestion)
       },
     },
     methods: {
-      async updateSuggestions(v) {
-        if (!v.trim()) {
+      async updateSuggestions(search) {
+        if (!search.trim() || this.selectedSuggestion.text === search) {
           return
         }
         this.loading = true
-        const response = await Api.getPlaceSuggestions(v.trim())
+        const response = await Api.getPlaceSuggestions(search.trim())
         this.suggestions = response.map(suggestion => ({
           text: suggestion.name,
           value: suggestion,
         }))
-        console.log(this.suggestions)
         this.loading = false
       },
       onIconClick() {
@@ -73,8 +71,10 @@
       },
       async onSearchIconClicked() {
         await this.updateSuggestions()
-        this.select = this.suggestions.length > 0 ? this.suggestions[0] : null
-        // TODO Update store?
+        if (this.suggestions.length > 0) {
+          this.selectedSuggestion = this.suggestions[0]
+          this.$store.commit('setSelectedPlace', this.selectedSuggestion)
+        }
       },
       onCenterIconClicked() {
         const userAllowedGeolocation = this.$store.state.location !== null
