@@ -1,13 +1,13 @@
 <template>
   <v-slide-y-transition>
-    <div v-if="value" class="info-box-container">
-      <v-card class="d-inline-block mx-auto pa-5" max-width="400">
+    <div v-if="value" class="info-box-container" :class="{mobile: $vuetify.breakpoint.smAndDown}">
+      <v-card class="d-inline-block mx-auto pa-5">
         <template v-if="!!place">
           <v-icon size="20" class="close-icon" @click="$emit('input', false)">
             mdi-close
           </v-icon>
 
-          <h2>{{ place.name }}</h2>
+          <h2 class="place-name">{{ place.name }}</h2>
           <div class="grey--text pb-3">{{ place.vicinity }}</div>
 
           <!--
@@ -65,8 +65,6 @@
             multiple
             maxlength="15"
             persistent-hint
-            item-text="label"
-            item-value="id"
             small-chips
           >
             <template v-slot:no-data>
@@ -137,14 +135,13 @@
     methods: {
       async fetchPlace() {
         this.loading = true
-        const {data} = await Api.getPlaceById(this.placeId)
-        this.place = data
+        this.place = await Api.getPlaceById(this.placeId)
         this.loading = false
       },
       fetchAvailableTags: throttle(async function() {
         this.commentTagsLoading = true
         try {
-          this.commentTagsAvailable = await Api.queryTags(this.commentTagsSearch || '')
+          this.commentTagsAvailable = await Api.getTags(this.commentTagsSearch || '')
         } catch (e) {
           console.error(e)
         }
@@ -170,6 +167,16 @@
     top: 32px;
     right: 32px;
     max-height: 500px;
+    max-width: 400px;
+
+    &.mobile {
+      top: auto;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      max-height: 75vh;
+      max-width: none;
+    }
 
     z-index: 10;
 
@@ -193,5 +200,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .place-name {
+    line-height: 1;
   }
 </style>
