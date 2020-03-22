@@ -4,8 +4,10 @@
       <router-view />
 
       <v-dialog v-model="initialDialogOpen" max-width="500px">
-        <v-card class="pa-5" color="red darken-1" dark>
-          <h1>Bevor Du loslegst...</h1>
+        <v-card class="pa-5">
+          <div class="d-flex justify-center logo">
+            <img src="./assets/preview-gradient.png" alt="mapion" />
+          </div>
 
           <div class="my-3">
             Dies ist eine Webseite, die jeder und jedem in unserer Gesellschaft den Zugang zu notwendigen Gütern in
@@ -15,7 +17,6 @@
 
           <h3>
             Der Einzelhandel bleibt geöffnet und die Lieferketten bestmöglich aufrechterhalten. (<a
-              class="white--text"
               target="_blank"
               href="https://www.bundesregierung.de/breg-de/aktuelles/vereinbarung-zwischen-der-bundesregierung-und-den-regierungschefinnen-und-regierungschefs-der-bundeslaender-angesichts-der-corona-epidemie-in-deutschland-1730934"
               >Meldung der Bundesregierung</a
@@ -52,3 +53,11 @@
     },
   }
 </script>
+
+<style lang="scss" scoped>
+  .logo {
+    img {
+      width: 100%;
+    }
+  }
+</style>
