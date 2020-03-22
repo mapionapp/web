@@ -1,5 +1,5 @@
 <template>
-  <v-card id="floating-card" :class="{ mobile: $vuetify.breakpoint.smAndDown }">
+  <v-card class="floating-card" :class="{mobile: $vuetify.breakpoint.smAndDown}">
     <slot />
   </v-card>
 </template>

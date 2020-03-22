@@ -5,38 +5,85 @@ const axios = BaseAxios.create({
 })
 
 export class Api {
+  /**
+   * @param placeId
+   * @returns {Promise<{
+   *  id: string,
+   *  placeId: string,
+   *  name: string,
+   *  placeType: string[],
+   *  location: { lat: number, lng: number},
+   *  icon: string,
+   *  googleUrl: string,
+   *  vicinity: string,
+   *  comments: Array<{ id: string content: string}>,
+   *  tags: Array<{ id: string, tag: string}>,
+   *  createdAt: string
+   * }>}
+   */
   static async getPlaceById(placeId) {
-    const { data } = await axios.get(`/v1/place/${placeId}`)
-    return data
+    return await axios.get(`/v1/place/${placeId}`)
   }
-  static async getPlaceByLocation({ location: { latitude, longitude } }) {
-    const { data } = await axios.get(`/v1/place/${latitude}/${longitude}`)
-    return data
+
+  /**
+   * Has a default radius of 50m
+   * @param {number} latitude
+   * @param {number} longitude
+   * @returns {Promise<Array<{
+   *  id: string,
+   *  placeId: string,
+   *  name: string,
+   *  placeType: string[],
+   *  location: { lat: number, lng: number},
+   *  icon: string,
+   *  googleUrl: string,
+   *  vicinity: string,
+   *  comments: Array<{ id: string, content: string}>,
+   *  tags: Array<{ id: string, tag: string}>,
+   *  createdAt: string
+   * }>>}
+   */
+  static async getPlacesWithDetails(latitude, longitude) {
+    return await axios.get(`/v1/places/${latitude}/${longitude}`)
   }
-  static async getInVicinity({ location: { latitude, longitude } }) {
-    const radius = 1500
-    const { data } = await axios.get(
-      `/v1/vicinity/${latitude}/${longitude}/${radius}`
-    )
-    return data
+
+  /**
+   * @param latitude
+   * @param longitude
+   * @returns {Promise<Array<{
+   *  id: string
+   *  placeId: string
+   *  name: string
+   *  placeType: string[]
+   *  location: {lat: number,lng: number}
+   *  commentsCount: number
+   * }>>}
+   */
+  static async getPlacesWithBasics(latitude, longitude, radius = 1500) {
+    return await axios.get(`/v1/vicinity/${latitude}/${longitude}/${radius}`)
   }
 
   /**
    * @param {string} query
-   * @returns {Promise<Array<{name: string, placeId: string, commentsCount: 0}>>}
+   * @returns {Promise<Array<{
+   *  name: string,
+   *  placeId: string,
+   *  commentsCount: 0
+   * }>>}
    */
   static async getPlaceSuggestions(query) {
-    const { data } = await axios.get(`/v1/autocomplete/${query}`)
-    return data
+    return await axios.get(`/v1/autocomplete/${query}`)
   }
+
+  /**
+   *
+   * @param query
+   * @returns {Promise<Array<{
+   *  id: string,
+   *  label: string
+   * }>>}
+   */
   static async getTags(query) {
-    const { data } = await axios.get(`/v1/tags/${query}`)
-    return data
+    return await axios.get(`/v1/tags/${query}`)
   }
 }
-
-// 1. User öffnet App zum ersten Mal -> Wir nehmen seine Location vom Browser und schicken die Location mit Radius an unser Backend. Die geben uns nearby places zurück. Das gleiche machen wir jedes Mal, wenn der User scrollt (debounced).
-// 2. Wir suchen einen String im Suchfeld: Wir schicken den String ans Backend (wahrscheinlich zsm. mit Location). Die returnen ein Object mit name, placeId, location, savedInOurSystem
-//     -> Wenn der User einen dieser autocomplete Vorschläge auswählt, zoomen wir zur neuen location und schicken die placeId an den Endpoint für mehr Informationen (den gibt es bereits, siehe backend.readme.md)
-//
-// Für 1,2 bauen sie jetzt 2 neue Endpoints
