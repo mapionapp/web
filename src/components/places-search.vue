@@ -29,7 +29,7 @@
   import {Api} from '../lib/Api'
 
   export default {
-    name: 'info-box',
+    name: 'places-search',
     components: {FloatingCard},
     data() {
       return {
@@ -46,6 +46,17 @@
       },
     },
     watch: {
+      '$store.state.location': {
+        immediate: true,
+        handler(location) {
+          if (location !== null && !this.mapLocationAcquired) {
+            this.mapLocationAcquired = true
+            this.mapCenter = location
+            this.mapZoom = location.accuracy < 500 ? 12 : 10
+            this.updateMap()
+          }
+        },
+      },
       search(search) {
         search && this.updateSuggestions(search)
       },
