@@ -20,8 +20,13 @@ export class Api {
     )
     return data
   }
+
+  /**
+   * @param {string} query
+   * @returns {Promise<Array<{name: string, placeId: string, commentsCount: 0}>>}
+   */
   static async getPlaceSuggestions(query) {
-    const { data } = await axios.get(`/v1/tags/${query}`)
+    const { data } = await axios.get(`/v1/autocomplete/${query}`)
     return data
   }
   static async getTags(query) {
