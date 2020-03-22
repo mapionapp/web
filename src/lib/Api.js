@@ -22,7 +22,8 @@ export class Api {
    * }>}
    */
   static async getPlaceById(placeId) {
-    return await axios.get(`/v1/place/${placeId}`)
+    const {data} = await axios.get(`/v1/place/${placeId}`)
+    return data
   }
 
   /**
@@ -44,7 +45,8 @@ export class Api {
    * }>>}
    */
   static async getPlacesWithDetails(latitude, longitude) {
-    return await axios.get(`/v1/places/${latitude}/${longitude}`)
+    const {data} = await axios.get(`/v1/places/${latitude}/${longitude}`)
+    return data
   }
 
   /**
@@ -60,7 +62,8 @@ export class Api {
    * }>>}
    */
   static async getPlacesWithBasics(latitude, longitude, radius = 1500) {
-    return await axios.get(`/v1/vicinity/${latitude}/${longitude}/${radius}`)
+    const {data} = await axios.get(`/v1/vicinity/${latitude}/${longitude}/${radius}`)
+    return data
   }
 
   /**
@@ -72,7 +75,10 @@ export class Api {
    * }>>}
    */
   static async getPlaceSuggestions(query) {
-    return await axios.get(`/v1/autocomplete/${query}`)
+    const {data} = await axios.get(`/v1/autocomplete`, {
+      params: {query},
+    })
+    return data
   }
 
   /**
@@ -84,23 +90,19 @@ export class Api {
    * }>>}
    */
   static async getTags(query) {
-    return await axios.get(`/v1/tags/${query}`)
-  }
-
-  static async queryTags(query) {
     const {data} = await axios.get(`/v1/tags/${query}`)
     return data
   }
 
   static async submitTag(comment, label) {
-    const {data} = await axios.put(`/v1/tag`, {
+    const {data} = await axios.post(`/v1/tag`, {
       label,
     })
     return data
   }
 
   static async submitComment(placeId, comment, tags = []) {
-    const {data} = await axios.put(`/v1/place/${placeId}/comment`, {
+    const {data} = await axios.post(`/v1/place/${placeId}/comment`, {
       content: comment,
       tags,
     })
