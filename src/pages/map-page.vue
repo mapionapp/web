@@ -5,18 +5,18 @@
     <gmap-map
       class="map"
       ref="map"
-      :center="{ lat: 50.6498903, lng: 11.0150288 }"
+      :center="{lat: 50.6498903, lng: 11.0150288}"
       :zoom="mapZoom"
       :options="{
         mapTypeControl: false,
         streetViewControl: false,
         fullscreenControl: false,
       }"
-      @click="isInfoBoxShown = true"
+      @click="onMapClick"
     >
     </gmap-map>
 
-    <info-box v-model="isInfoBoxShown" />
+    <info-box v-model="isInfoBoxVisible" :place-id="$route.params.placeId" />
   </div>
 </template>
 
@@ -26,13 +26,13 @@
 
   export default {
     name: 'map-page',
-    components: { InfoBox, PlacesSearch },
+    components: {InfoBox, PlacesSearch},
     data: () => ({
       mapLoaded: false,
-      mapCenter: { lat: 50.6498903, lng: 11.0150288 },
+      mapCenter: {lat: 50.6498903, lng: 11.0150288},
       mapZoom: 6,
       mapLocationAcquired: false,
-      isInfoBoxShown: false,
+      isInfoBoxVisible: false,
     }),
     watch: {
       '$store.state.location': {
@@ -46,6 +46,12 @@
           }
         },
       },
+      '$route.params.placeId': {
+        immediate: true,
+        handler(placeId) {
+          this.isInfoBoxVisible = !!placeId
+        },
+      },
     },
     async mounted() {
       this.map = await this.$refs.map.$mapPromise
@@ -57,6 +63,16 @@
         if (!this.mapLoaded) return
         this.map.panTo(this.mapCenter)
         this.map.setZoom(this.mapZoom)
+      },
+      onMapClick(data) {
+        if (data.placeId) {
+          this.$router.push({
+            name: 'index',
+            params: {
+              placeId: data.placeId,
+            },
+          })
+        }
       },
     },
   }

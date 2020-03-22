@@ -14,6 +14,8 @@
     "core-js": "^3.6.4",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
+    "lodash.throttle": "^4.1.1",
+    "moment": "^2.24.0",
     "prettier": "^1.19.1",
     "register-service-worker": "^1.6.2",
     "roboto-fontface": "*",
@@ -44,10 +46,6 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,jsx,vue}": [
-      "prettier --write",
-      "git add"
-    ],
     "*.{js,jsx,vue}": [
       "vue-cli-service lint",
       "git add"
