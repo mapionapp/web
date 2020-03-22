@@ -22,7 +22,8 @@ export class Api {
    * }>}
    */
   static async getPlaceById(placeId) {
-    return await axios.get(`/v1/place/${placeId}`)
+    const {data} = await axios.get(`/v1/place/${placeId}`)
+    return data
   }
 
   /**
@@ -43,8 +44,9 @@ export class Api {
    *  createdAt: string
    * }>>}
    */
-  static async getPlacesWithDetails(latitude, longitude) {
-    return await axios.get(`/v1/places/${latitude}/${longitude}`)
+  async getPlacesWithDetails(latitude, longitude) {
+    const {data} = await axios.get(`/v1/places/${latitude}/${longitude}`)
+    return data
   }
 
   /**
@@ -60,7 +62,8 @@ export class Api {
    * }>>}
    */
   static async getPlacesWithBasics(latitude, longitude, radius = 1500) {
-    return await axios.get(`/v1/vicinity/${latitude}/${longitude}/${radius}`)
+    const {data} = await axios.get(`/v1/vicinity/${latitude}/${longitude}/${radius}`)
+    return data
   }
 
   /**
@@ -72,7 +75,8 @@ export class Api {
    * }>>}
    */
   static async getPlaceSuggestions(query) {
-    return await axios.get(`/v1/autocomplete/${query}`)
+    const {data} = await axios.get(`/v1/autocomplete/${query}`)
+    return data
   }
 
   /**
@@ -84,10 +88,6 @@ export class Api {
    * }>>}
    */
   static async getTags(query) {
-    return await axios.get(`/v1/tags/${query}`)
-  }
-
-  static async queryTags(query) {
     const {data} = await axios.get(`/v1/tags/${query}`)
     return data
   }
