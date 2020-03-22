@@ -2,7 +2,7 @@
   <v-slide-y-transition>
     <div v-if="value" class="info-box-container">
       <v-card class="d-inline-block mx-auto pa-5" max-width="400">
-        <template v-if="place !== null">
+        <template v-if="!!place">
           <v-icon size="20" class="close-icon" @click="$emit('input', false)">
             mdi-close
           </v-icon>
@@ -137,7 +137,8 @@
     methods: {
       async fetchPlace() {
         this.loading = true
-        this.place = await Api.getPlaceById(this.placeId)
+        const {data} = await Api.getPlaceById(this.placeId)
+        this.place = data
         this.loading = false
       },
       fetchAvailableTags: throttle(async function() {
