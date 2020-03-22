@@ -1,22 +1,24 @@
 <template>
   <div class="fill-height">
-    <floating-card
-      class="pa-1 search-bar"
-      :class="{ 'elevation-24': searchFocused }"
-    >
-      <v-text-field
-        v-model="searchQuery"
+    <floating-card class="pa-1 search-bar" :class="{'elevation-24': searchFocused}">
+      <v-autocomplete
+        v-model="searchedPlace"
         placeholder="Standort suchen"
         @focus="searchFocused = true"
         @blur="searchFocused = false"
+        auto-select-first
+        :items="searchItems"
         class="search-input"
         :class="{
           expanded: searchShouldExpand,
           mobile: $vuetify.breakpoint.smAndDown,
         }"
-        :append-icon="searchQuery ? 'mdi-magnify' : 'mdi-crosshairs-gps'"
+        clearable
+        item-text="name"
+        return-object
+        :search-input.sync="searchQuery"
+        :append-icon="searchQuery ? '' : 'mdi-crosshairs-gps'"
         @click:append="onTextFieldIconClick"
-        @keyup.enter="onTextFieldEnter"
         hide-details
         solo
         flat
@@ -26,37 +28,40 @@
     <gmap-map
       class="map"
       ref="map"
-      :center="{ lat: 50.6498903, lng: 11.0150288 }"
+      :center="{lat: 50.6498903, lng: 11.0150288}"
       :zoom="mapZoom"
       :options="{
         mapTypeControl: false,
         streetViewControl: false,
         fullscreenControl: false,
       }"
-      @click="isInfoBoxShown = true"
+      @click="onMapClick"
     >
     </gmap-map>
 
-    <info-box v-model="isInfoBoxShown" />
+    <info-box v-model="isInfoBoxVisible" :place-id="$route.params.placeId" @place-updated="onPlaceUpdated" />
   </div>
 </template>
 
 <script>
   import FloatingCard from '../components/floating-card'
-  import { Api } from '../lib/Api'
   import InfoBox from '../components/info-box'
+  import {Api} from '../lib/Api'
+  import throttle from 'lodash.throttle'
 
   export default {
     name: 'map-page',
-    components: { FloatingCard, InfoBox },
+    components: {FloatingCard, InfoBox},
     data: () => ({
       mapLoaded: false,
       searchFocused: false,
+      searchedPlace: '',
       searchQuery: '',
-      mapCenter: { lat: 50.6498903, lng: 11.0150288 }, // This is where user has scrolled to, not his actual position
+      searchItems: [],
+      mapCenter: {lat: 50.6498903, lng: 11.0150288},
       mapZoom: 6,
       mapLocationAcquired: false,
-      isInfoBoxShown: false,
+      isInfoBoxVisible: false,
     }),
     computed: {
       searchShouldExpand() {
@@ -75,6 +80,23 @@
           }
         },
       },
+      '$route.params.placeId': {
+        immediate: true,
+        handler(placeId) {
+          this.isInfoBoxVisible = !!placeId
+        },
+      },
+      searchQuery() {
+        this.throttledLocationSearch()
+      },
+      searchedPlace(place) {
+        this.$router.push({
+          name: 'index',
+          params: {
+            placeId: place.placeId,
+          },
+        })
+      },
     },
     async mounted() {
       this.map = await this.$refs.map.$mapPromise
@@ -88,30 +110,21 @@
         this.map.setZoom(this.mapZoom)
       },
       onTextFieldIconClick() {
-        this.searchQuery
-          ? this.onSearchIconClicked()
-          : this.onCenterIconClicked()
+        this.searchQuery ? this.onSearchIconClicked() : this.onCenterIconClicked()
       },
       onTextFieldEnter() {
-        this.searchForQuery()
+        this.throttledLocationSearch()
       },
       onSearchIconClicked() {
-        this.searchForQuery()
+        this.throttledLocationSearch()
       },
-      async searchForQuery() {
-        const search = this.searchQuery.trim()
-        if (search) {
-          const data = await Api.nearbyPlaces({
-            keyword: search,
-            location: {
-              longitude: this.mapCenter.lng,
-              latitude: this.mapCenter.lat,
-            },
-          })
-          // data has .next_page_token if there are too many results
-          console.log(data) // TODO What to do with data?
+      throttledLocationSearch: throttle(async function() {
+        if (this.searchQuery) {
+          this.searchItems = await Api.queryPlaces(this.searchQuery.trim())
+        } else {
+          this.searchItems = []
         }
-      },
+      }, 400),
       onCenterIconClicked() {
         const userAllowedGeolocation = this.$store.state.location !== null
         if (userAllowedGeolocation) {
@@ -123,6 +136,21 @@
       centerLocation() {
         this.mapCenter = this.$store.state.location
         this.mapZoom = this.$store.state.location.accuracy < 500 ? 12 : 10
+        this.updateMap()
+      },
+      onMapClick(data) {
+        if (data.placeId) {
+          this.$router.push({
+            name: 'index',
+            params: {
+              placeId: data.placeId,
+            },
+          })
+        }
+      },
+      onPlaceUpdated(place) {
+        this.mapCenter = place.location
+        this.mapZoom = 18
         this.updateMap()
       },
     },
