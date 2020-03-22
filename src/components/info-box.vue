@@ -137,7 +137,7 @@
     methods: {
       async fetchPlace() {
         this.loading = true
-        this.place = await Api.getPlace(this.placeId)
+        this.place = await Api.getPlaceById(this.placeId)
         this.loading = false
       },
       fetchAvailableTags: throttle(async function() {
