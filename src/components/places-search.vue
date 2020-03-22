@@ -27,6 +27,7 @@
 <script>
   import FloatingCard from '../components/floating-card'
   import {Api} from '../lib/Api'
+  import throttle from 'lodash.throttle'
 
   export default {
     name: 'places-search',
@@ -54,7 +55,7 @@
       },
     },
     methods: {
-      async updateSuggestions(search) {
+      updateSuggestions: throttle(async search => {
         if (!search.trim() || (this.selectedSuggestion && this.selectedSuggestion.text === search)) {
           return
         }
@@ -65,7 +66,7 @@
           value: suggestion,
         }))
         this.loading = false
-      },
+      }, 50),
       onIconClick() {
         this.search ? this.onSearchIconClicked() : this.onCenterIconClicked()
       },
