@@ -29,11 +29,11 @@
         streetViewControl: false,
         fullscreenControl: false,
       }"
-      @click="isInfoBoxShown = true"
+      @click="onMapClick"
     >
     </gmap-map>
 
-    <info-box v-model="isInfoBoxShown" />
+    <info-box v-model="isInfoBoxVisible" :place-id="$route.params.placeId" />
   </div>
 </template>
 
@@ -51,7 +51,7 @@
       mapCenter: {lat: 50.6498903, lng: 11.0150288},
       mapZoom: 6,
       mapLocationAcquired: false,
-      isInfoBoxShown: false,
+      isInfoBoxVisible: false,
     }),
     computed: {
       searchShouldExpand() {
@@ -68,6 +68,12 @@
             this.mapZoom = location.accuracy < 500 ? 12 : 10
             this.updateMap()
           }
+        },
+      },
+      '$route.params.placeId': {
+        immediate: true,
+        handler(placeId) {
+          this.isInfoBoxVisible = !!placeId
         },
       },
     },
@@ -100,6 +106,16 @@
         this.mapCenter = this.$store.state.location
         this.mapZoom = this.$store.state.location.accuracy < 500 ? 12 : 10
         this.updateMap()
+      },
+      onMapClick(data) {
+        if (data.placeId) {
+          this.$router.push({
+            name: 'index',
+            params: {
+              placeId: data.placeId,
+            },
+          })
+        }
       },
     },
   }

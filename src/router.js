@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/:placeId?',
     name: 'index',
     component: require('./pages/map-page').default,
   },
