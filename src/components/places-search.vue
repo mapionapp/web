@@ -66,7 +66,7 @@
     },
     methods: {
       async updateSuggestions(search) {
-        if (!search.trim() || this.selectedSuggestion.text === search) {
+        if (!search.trim() || (this.selectedSuggestion && this.selectedSuggestion.text === search)) {
           return
         }
         this.loading = true
