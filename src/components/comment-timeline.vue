@@ -1,6 +1,6 @@
 <template>
   <div class="timeline-container">
-    <v-timeline :dense="$vuetify.breakpoint.smAndDown" align-top>
+    <v-timeline dense align-top>
       <v-timeline-item
         v-for="comment in comments"
         v-bind:key="comment.date"

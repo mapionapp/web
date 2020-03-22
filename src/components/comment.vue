@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="comment-date">{{ comment.date }}</div>
     <div>
       <v-icon>mdi-account-circle</v-icon>
       {{ comment.author }}
@@ -10,14 +11,29 @@
 </template>
 
 <script>
+  import moment from 'moment'
+
   export default {
     name: 'comment',
     props: ['comment'],
-    methods: {},
+    created() {
+      this.formatDates()
+    },
+    methods: {
+      formatDates() {
+        this.comment.date = moment(new Date(this.comment.date)).format('DD MMM, hh:mm')
+      },
+    },
   }
 </script>
 
 <style lang="scss" scoped>
+  .comment-date {
+    font-size: 10px;
+    font-weight: 200;
+    color: #bbbbbb;
+  }
+
   .comment-text {
     font-size: 12px;
     color: grey;
