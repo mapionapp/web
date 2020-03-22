@@ -24,5 +24,5 @@ jobs:
       with:
         webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
         severity: info
-        description: Successfully deployed backend
+        description: Successfully deployed frontend
         username: GitHub Workflows
