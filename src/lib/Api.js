@@ -75,7 +75,9 @@ export class Api {
    * }>>}
    */
   static async getPlaceSuggestions(query) {
-    const {data} = await axios.get(`/v1/autocomplete/${query}`)
+    const {data} = await axios.get(`/v1/autocomplete`, {
+      params: {query},
+    })
     return data
   }
 
