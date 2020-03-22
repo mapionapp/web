@@ -266,34 +266,28 @@
       &ndash; insbesondere gesetzliche Aufbewahrungsfristen &ndash; bleiben unber&uuml;hrt.
     </p>
     <h2>5. Plugins und Tools</h2>
-    <h3>YouTube</h3>
+    <h3>Google Maps</h3>
     <p>
-      Diese Website bindet Videos der Website YouTube ein. Betreiber der Website ist die Google Ireland Limited
+      Diese Website bindet Karten von Google Maps ein. Betreiber der Website ist die Google Ireland Limited
       (&bdquo;Google&ldquo;), Gordon House, Barrow Street, Dublin 4, Irland.
     </p>
     <p>
-      Wenn Sie eine unserer Webseiten besuchen, auf denen YouTube eingebunden ist, wird eine Verbindung zu den Servern
-      von YouTube hergestellt. Dabei wird dem YouTube-Server mitgeteilt, welche unserer Seiten Sie besucht haben.
+      Wenn Sie unsere Webseite besuchen, wird eine Verbindung zu den Servern von Google Maps hergestellt. Dabei wird dem
+      Google Maps-Server mitgeteilt, welche unserer Seiten Sie besucht haben.
     </p>
     <p>
-      Des Weiteren kann YouTube verschiedene Cookies auf Ihrem Endger&auml;t speichern. Mit Hilfe dieser Cookies kann
-      YouTube Informationen &uuml;ber Besucher dieser Website erhalten. Diese Informationen werden u. a. verwendet, um
-      Videostatistiken zu erfassen, die Anwenderfreundlichkeit zu verbessern und Betrugsversuchen vorzubeugen. Die
-      Cookies verbleiben auf Ihrem Endger&auml;t, bis Sie sie l&ouml;schen.
+      Des Weiteren kann Google Maps verschiedene Cookies auf Ihrem Endger&auml;t speichern. Mit Hilfe dieser Cookies
+      Google Maps Informationen &uuml;ber Besucher dieser Website erhalten. Diese Informationen werden u. a. verwendet,
+      um die Anwenderfreundlichkeit zu verbessern und Betrugsversuchen vorzubeugen. Die Cookies verbleiben auf Ihrem
+      Endger&auml;t, bis Sie sie l&ouml;schen.
     </p>
     <p>
-      Wenn Sie in Ihrem YouTube-Account eingeloggt sind, erm&ouml;glichen Sie YouTube, Ihr Surfverhalten direkt Ihrem
-      pers&ouml;nlichen Profil zuzuordnen. Dies k&ouml;nnen Sie verhindern, indem Sie sich aus Ihrem YouTube-Account
+      Wenn Sie in Ihrem Google-Account eingeloggt sind, erm&ouml;glichen Sie Google, Ihr Surfverhalten direkt Ihrem
+      pers&ouml;nlichen Profil zuzuordnen. Dies k&ouml;nnen Sie verhindern, indem Sie sich aus Ihrem Google-Account
       ausloggen.
     </p>
     <p>
-      Die Nutzung von YouTube erfolgt im Interesse einer ansprechenden Darstellung unserer Online-Angebote. Dies stellt
-      ein berechtigtes Interesse im Sinne von Art. 6 Abs. 1 lit. f DSGVO dar. Sofern eine entsprechende Einwilligung
-      abgefragt wurde (z. B. eine Einwilligung zur Speicherung von Cookies), erfolgt die Verarbeitung
-      ausschlie&szlig;lich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO; die Einwilligung ist jederzeit widerrufbar.
-    </p>
-    <p>
-      Weitere Informationen zum Umgang mit Nutzerdaten finden Sie in der Datenschutzerkl&auml;rung von YouTube unter:
+      Weitere Informationen zum Umgang mit Nutzerdaten finden Sie in der Datenschutzerkl&auml;rung von Google unter:
       <a href="https://policies.google.com/privacy?hl=de" target="_blank" rel="noopener noreferrer"
         >https://policies.google.com/privacy?hl=de</a
       >.
