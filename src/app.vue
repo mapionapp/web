@@ -25,7 +25,7 @@
 
           <div class="my-4">
             Das funktioniert nur, wenn
-            <strong> jede und jeder mithilft</strong>, indem er/sie angemessenem Maße einkauft. Bitte denke beim
+            <strong> jede und jeder mithilft</strong>, indem er/sie in angemessenem Maße einkauft. Bitte denke beim
             Einkaufen auch Menschen, denen es derzeit nur erschwert möglich ist, ihre Einkäufe tätigen.
           </div>
 
