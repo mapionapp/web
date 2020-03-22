@@ -5,6 +5,16 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/impressum',
+    name: 'imprint',
+    component: () => import('./pages/imprint-page'),
+  },
+  {
+    path: '/datenschutz',
+    name: 'privacy',
+    component: () => import('./pages/privacy-page'),
+  },
+  {
     path: '/:placeId?',
     name: 'index',
     component: require('./pages/map-page').default,

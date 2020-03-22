@@ -84,6 +84,9 @@
             hide-details
             label="Ich habe die Datenschutzerklärung gelesen und akzeptiert"
           />
+
+          <router-link :to="{name: 'privacy'}">Datenschutzerklärung</router-link>
+
           <div class="d-flex justify-end pt-5">
             <v-btn depressed color="accent" :disabled="!commentPrivacy" :loading="loading" @click="submitComment">
               Absenden

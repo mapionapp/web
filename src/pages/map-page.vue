@@ -1,6 +1,6 @@
 <template>
   <div class="fill-height">
-    <floating-card class="pa-1 search-bar" :class="{'elevation-24': searchFocused}">
+    <floating-card class="pa-1 search-bar d-flex align-center" :class="{'elevation-24': searchFocused}">
       <v-autocomplete
         v-model="searchedPlace"
         placeholder="Standort suchen"
@@ -23,6 +23,21 @@
         solo
         flat
       />
+      <v-menu offset-y>
+        <template v-slot:activator="{on}">
+          <v-btn icon v-on="on">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item @click="$router.push({name: 'imprint'})">
+            <v-list-item-title>Impressum</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="$router.push({name: 'privacy'})">
+            <v-list-item-title>Datenschutz</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </floating-card>
 
     <gmap-map
