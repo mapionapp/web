@@ -1,8 +1,5 @@
 <template>
-  <floating-card
-    class="pa-1 search-bar"
-    :class="{ 'elevation-24': searchFocused }"
-  >
+  <floating-card class="pa-1 search-bar" :class="{'elevation-24': searchFocused}">
     <v-autocomplete
       v-model="select"
       :search-input.sync="search"
@@ -29,11 +26,11 @@
 
 <script>
   import FloatingCard from '../components/floating-card'
-  import { Api } from '../lib/Api'
+  import {Api} from '../lib/Api'
 
   export default {
     name: 'info-box',
-    components: { FloatingCard },
+    components: {FloatingCard},
     data() {
       return {
         isLoading: false,
@@ -63,7 +60,12 @@
           return
         }
         this.loading = true
-        this.suggestions = await Api.getPlaceSuggestions(v.trim())
+        const response = await Api.getPlaceSuggestions(v.trim())
+        this.suggestions = response.map(suggestion => ({
+          text: suggestion.name,
+          value: suggestion,
+        }))
+        console.log(this.suggestions)
         this.loading = false
       },
       onIconClick() {
