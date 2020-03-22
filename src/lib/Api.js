@@ -95,14 +95,14 @@ export class Api {
   }
 
   static async submitTag(comment, label) {
-    const {data} = await axios.put(`/v1/tag`, {
+    const {data} = await axios.post(`/v1/tag`, {
       label,
     })
     return data
   }
 
   static async submitComment(placeId, comment, tags = []) {
-    const {data} = await axios.put(`/v1/place/${placeId}/comment`, {
+    const {data} = await axios.post(`/v1/place/${placeId}/comment`, {
       content: comment,
       tags,
     })
