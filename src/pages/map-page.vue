@@ -51,7 +51,7 @@
       mapCenter: {lat: 50.6498903, lng: 11.0150288},
       mapZoom: 6,
       mapLocationAcquired: false,
-      isInfoBoxShown: false,
+      isInfoBoxShown: true,
     }),
     computed: {
       searchShouldExpand() {

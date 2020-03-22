@@ -23,15 +23,35 @@
           <v-icon size="20" color="orange">mdi-account-multiple</v-icon>
           Auslastung: mittel
         </div>
+
+        <v-card-actions style="justify-content: flex-end">
+          <v-btn icon @click="isExpanded = !isExpanded" class="show-comments-button">
+            <v-icon>{{ isExpanded ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+          </v-btn>
+        </v-card-actions>
+
+        <v-expand-transition>
+          <div v-show="isExpanded">
+            <v-divider></v-divider>
+            <br />
+            <timeline />
+          </div>
+        </v-expand-transition>
       </v-card>
     </div>
   </v-slide-y-transition>
 </template>
 
 <script>
+  import Timeline from './comment-timeline'
+
   export default {
     name: 'info-box',
+    components: {Timeline},
     props: ['title', 'value'],
+    data: () => ({
+      isExpanded: false,
+    }),
     methods: {},
   }
 </script>
