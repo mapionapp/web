@@ -115,12 +115,4 @@ export class Api {
     })
     return data
   }
-  static async queryPlaces(query) {
-    const {data} = await axios.get(`/v1/autocomplete`, {
-      params: {
-        query,
-      },
-    })
-    return data
-  }
 }
