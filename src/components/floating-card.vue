@@ -11,9 +11,8 @@
 </script>
 
 <style lang="scss" scoped>
-  #floating-card {
+  .floating-card {
     position: fixed;
-    padding: 0 !important;
     top: 32px;
     left: 32px;
 

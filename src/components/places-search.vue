@@ -102,12 +102,11 @@
     .autocomplete {
       width: 350px;
       padding: 0;
-      margin: 0 !important;
-      transition: transform 400ms;
+      transition: width 400ms $animation-curve, padding 400ms $animation-curve;
 
       &.expanded {
-        // transform: scale(1.1);
-        // transform-origin: top left;
+        width: 450px;
+        padding: 8px;
       }
 
       &.mobile {
