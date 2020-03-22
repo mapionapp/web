@@ -44,7 +44,7 @@ export class Api {
    *  createdAt: string
    * }>>}
    */
-  async getPlacesWithDetails(latitude, longitude) {
+  static async getPlacesWithDetails(latitude, longitude) {
     const {data} = await axios.get(`/v1/places/${latitude}/${longitude}`)
     return data
   }
