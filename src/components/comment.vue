@@ -30,7 +30,7 @@
 <style lang="scss" scoped>
   .comment-date {
     font-size: 10px;
-    font-weight: 200;
+    font-weight: 400;
     color: #bbbbbb;
   }
 
