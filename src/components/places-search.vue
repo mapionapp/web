@@ -46,21 +46,10 @@
       },
     },
     watch: {
-      '$store.state.location': {
-        immediate: true,
-        handler(location) {
-          if (location !== null && !this.mapLocationAcquired) {
-            this.mapLocationAcquired = true
-            this.mapCenter = location
-            this.mapZoom = location.accuracy < 500 ? 12 : 10
-            this.updateMap()
-          }
-        },
-      },
       search(search) {
         search && this.updateSuggestions(search)
       },
-      select(selectedSuggestion) {
+      selectedSuggestion(selectedSuggestion) {
         this.$store.commit('setSelectedPlace', selectedSuggestion)
       },
     },
@@ -81,7 +70,7 @@
         this.search ? this.onSearchIconClicked() : this.onCenterIconClicked()
       },
       async onSearchIconClicked() {
-        await this.updateSuggestions()
+        await this.updateSuggestions(this.search)
         if (this.suggestions.length > 0) {
           this.selectedSuggestion = this.suggestions[0]
           this.$store.commit('setSelectedPlace', this.selectedSuggestion)
