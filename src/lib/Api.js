@@ -44,8 +44,7 @@ export class Api {
    * }>>}
    */
   static async getPlacesWithDetails(latitude, longitude) {
-    const {data} = await axios.get(`/v1/places/${latitude}/${longitude}`)
-    return data
+    return await axios.get(`/v1/places/${latitude}/${longitude}`)
   }
 
   /**
@@ -61,8 +60,7 @@ export class Api {
    * }>>}
    */
   static async getPlacesWithBasics(latitude, longitude, radius = 1500) {
-    const {data} = await axios.get(`/v1/vicinity/${latitude}/${longitude}/${radius}`)
-    return data
+    return await axios.get(`/v1/vicinity/${latitude}/${longitude}/${radius}`)
   }
 
   /**
@@ -74,8 +72,7 @@ export class Api {
    * }>>}
    */
   static async getPlaceSuggestions(query) {
-    const {data} = await axios.get(`/v1/autocomplete/${query}`)
-    return data
+    return await axios.get(`/v1/autocomplete/${query}`)
   }
 
   /**
@@ -87,7 +84,6 @@ export class Api {
    * }>>}
    */
   static async getTags(query) {
-    const {data} = await axios.get(`/v1/tags/${query}`)
-    return data
+    return await axios.get(`/v1/tags/${query}`)
   }
 }
