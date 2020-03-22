@@ -90,7 +90,11 @@ export class Api {
    * }>>}
    */
   static async getTags(query) {
-    const {data} = await axios.get(`/v1/tags/${query}`)
+    const {data} = await axios.get(`/v1/tags`, {
+      params: {
+        query,
+      },
+    })
     return data
   }
 

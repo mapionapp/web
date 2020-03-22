@@ -4,6 +4,9 @@
     <div>
       {{ comment.content }}
     </div>
+    <v-chip-group>
+      <v-chip x-small v-for="tag in comment.tags" :key="tag" class="my-0">{{ tag }}</v-chip>
+    </v-chip-group>
   </div>
 </template>
 
