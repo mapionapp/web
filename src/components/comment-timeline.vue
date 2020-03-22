@@ -1,35 +1,28 @@
 <template>
   <div class="timeline-container">
-    <v-timeline dense align-top>
-      <v-timeline-item
-        v-for="comment in comments"
-        v-bind:key="comment.date"
-        color="grey lighten-1"
-        fill-dot
-        right
-        small
-      >
-        <comment v-bind:comment="comment" />
-      </v-timeline-item>
-    </v-timeline>
+    <div v-for="(comment, index) in comments" :key="index" class="comment-container">
+      <div class="timeline-decor pr-2">
+        <v-avatar color="primary" size="32">
+          <v-icon dark size="18">mdi-comment-outline</v-icon>
+        </v-avatar>
+        <div class="timeline-line" />
+      </div>
+      <comment :comment="comment" class="comment" />
+    </div>
   </div>
 </template>
 
 <script>
-  import {comments} from '../mocks/timeline-comments.js'
   import Comment from './comment'
 
   export default {
-    name: 'timeline',
+    name: 'comment-timeline',
     components: {Comment},
-    props: [],
-    data: () => ({
-      comments,
-    }),
-    created() {
-      this.comments = this.comments.sort((c1, c2) => {
-        return new Date(c2.date) - new Date(c1.date)
-      })
+    props: {
+      comments: {
+        type: Array,
+        default: () => [],
+      },
     },
     methods: {},
   }
@@ -38,34 +31,41 @@
 <style lang="scss" scoped>
   .timeline-container {
     width: 100%;
-    height: 200px;
     overflow-y: scroll;
 
     &::-webkit-scrollbar {
       display: none;
     }
+
+    .comment-container {
+      display: flex;
+
+      .timeline-decor {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .timeline-line {
+          width: 2px;
+          background-color: #dfdfdf;
+          flex-grow: 1;
+        }
+      }
+
+      &:last-of-type {
+        .timeline-line {
+          display: none;
+        }
+
+        .comment {
+          margin-bottom: 0;
+        }
+      }
+
+      .comment {
+        flex-grow: 1;
+        margin-bottom: 8px;
+      }
+    }
   }
-
-  .v-timeline {
-    padding-top: 0;
-  }
-
-  .v-timeline-item {
-    justify-content: flex-end;
-  }
-
-  .v-timeline-item__divider {
-    min-width: 40px;
-    width: 40px;
-    justify-content: flex-start;
-  }
-
-  // .v-application--is-ltr .v-timeline--dense:not(.v-timeline--reverse):before {
-  //   left: calc(20px - 1px);
-  // }
-
-  // .v-timeline-item__dot--small {
-  //   width: 12px;
-  //   height: 12px;
-  // }
 </style>
