@@ -1,12 +1,12 @@
 <template>
-  <v-card outlined class="pa-2">
+  <div>
     <div>
       <v-icon>mdi-account-circle</v-icon>
       {{ comment.author }}
     </div>
 
-    {{ comment.text }}
-  </v-card>
+    <div class="comment-text">{{ comment.text }}</div>
+  </div>
 </template>
 
 <script>
@@ -17,4 +17,10 @@
   }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  .comment-text {
+    font-size: 12px;
+    color: grey;
+    margin: 5px 0 0 28px;
+  }
+</style>
