@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <v-btn :to="{name: 'index'}" rounded color="primary" depressed dark>Zurück</v-btn>
     <div class="d-flex justify-center">
       <img src="../assets/preview-gradient.png" alt="mapion" />
     </div>
@@ -305,5 +306,7 @@
 <style lang="scss" scoped>
   img {
     max-width: 600px;
+    width: 100%;
+    height: 100%;
   }
 </style>
