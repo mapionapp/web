@@ -15,6 +15,11 @@ const routes = [
     component: () => import('./pages/privacy-page'),
   },
   {
+    path: '/willkommen',
+    name: 'welcome',
+    component: () => import('./pages/welcome-page'),
+  },
+  {
     path: '/:placeId?',
     name: 'index',
     component: require('./pages/map-page').default,

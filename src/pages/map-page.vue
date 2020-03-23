@@ -30,6 +30,9 @@
           </v-btn>
         </template>
         <v-list>
+          <v-list-item @click="$router.push({name: 'welcome'})">
+            <v-list-item-title>Welcomepage</v-list-item-title>
+          </v-list-item>
           <v-list-item @click="$router.push({name: 'imprint'})">
             <v-list-item-title>Impressum</v-list-item-title>
           </v-list-item>
