@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <router-link to="/">
-      <v-btn @click="to = '/'" rounded color="primary" depressed dark>Zurück</v-btn>
+    <router-link :to="{name: 'index'}">
+      <v-btn :to="{name: 'index'}" rounded color="primary" depressed dark>Zurück</v-btn>
     </router-link>
     <div class="d-flex justify-center">
       <img src="../assets/preview-gradient.png" alt="mapion" />
