@@ -1,5 +1,8 @@
 <template>
   <v-container>
+    <router-link to="/">
+      <v-btn @click="to = '/'" rounded color="primary" depressed dark>Zurück</v-btn>
+    </router-link>
     <div class="d-flex justify-center">
       <img src="../assets/preview-gradient.png" alt="mapion" />
     </div>
@@ -57,5 +60,7 @@
 <style lang="scss" scoped>
   img {
     max-width: 600px;
+    width: 100%;
+    height: 100%;
   }
 </style>
