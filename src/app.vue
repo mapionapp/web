@@ -28,9 +28,11 @@
             <strong> jede und jeder mithilft</strong>, indem er/sie in angemessenem Maße einkauft. Bitte denke beim
             Einkaufen auch Menschen, denen es derzeit nur erschwert möglich ist, ihre Einkäufe tätigen.
           </div>
-
+          Mit dem drücken einer der folgenden Knöpfe akzeptiere ist dies
           <div class="text-center">
-            <v-btn @click="pressAcceptBtn" rounded color="primary" dark depressed>Gelesen und Akzeptiert</v-btn>
+            <v-btn @click="pressAcceptBtn" rounded color="secondary" dark depressed>Weiter zur Karte</v-btn>
+            " "
+            <v-btn @click="pressIntroBtn" rounded color="primary" dark depressed>Weiter zum Intro</v-btn>
           </div>
         </v-card>
       </v-dialog>
@@ -48,6 +50,12 @@
       pressAcceptBtn: function(event) {
         if (event) {
           this.initialDialogOpen = false
+        }
+      },
+      pressIntroBtn: function(event) {
+        if (event) {
+          this.initialDialogOpen = false
+          location.href = '/'
         }
       },
     },

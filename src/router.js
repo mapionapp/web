@@ -15,6 +15,11 @@ const routes = [
     component: () => import('./pages/privacy-page'),
   },
   {
+    path: '/tour',
+    name: 'tour',
+    component: () => import('./pages/tour'),
+  },
+  {
     path: '/:placeId?',
     name: 'index',
     component: require('./pages/map-page').default,
