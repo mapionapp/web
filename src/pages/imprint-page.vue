@@ -11,9 +11,10 @@
     <h5 class="mb-3">Angaben gemäß § 5 TMG.</h5>
     <h4>Kontakt:</h4>
     <p class="mb-3">
-      Timo Schwarzer<br />
-      Helmholtzstr. 4<br />
-      38114 Braunschweig<br />
+      Diogo Souto Tuna<br />
+      <i>Im Rauhen Seifen 11<br />
+        57271 Hilchenbach</i><br />
+      <a href="mailto:info@mapion.de">info@mapion.de</a><br />
       und <a href="https://github.com/wirvsvirus-27">weitere Autoren</a>.
     </p>
     <h4 class="mb-2">Haftungsausschluss</h4>
