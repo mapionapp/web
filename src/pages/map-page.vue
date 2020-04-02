@@ -135,7 +135,7 @@
       },
       throttledLocationSearch: throttle(async function() {
         if (this.searchQuery) {
-          this.searchItems = await Api.queryPlaces(this.searchQuery.trim())
+          this.searchItems = await Api.getPlaceSuggestions(this.searchQuery.trim())
         } else {
           this.searchItems = []
         }
