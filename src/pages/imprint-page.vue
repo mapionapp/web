@@ -15,7 +15,7 @@
       <i>Im Rauhen Seifen 11<br />
         57271 Hilchenbach</i><br />
       <a href="mailto:info@mapion.de">info@mapion.de</a><br />
-      und <a href="https://github.com/wirvsvirus-27">weitere Autoren</a>.
+      und <a href="https://github.com/mapionapp">weitere Autoren</a>.
     </p>
     <h4 class="mb-2">Haftungsausschluss</h4>
     <h5>Haftung für Inhalte</h5>
