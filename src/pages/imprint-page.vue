@@ -12,8 +12,8 @@
     <h4>Kontakt:</h4>
     <p class="mb-3">
       Diogo Souto Tuna<br />
-      <i>Im Rauhen Seifen 11<br />
-        57271 Hilchenbach</i><br />
+      Im Rauhen Seifen 11<br />
+      57271 Hilchenbach<br />
       <a href="mailto:info@mapion.de">info@mapion.de</a><br />
       und <a href="https://github.com/mapionapp">weitere Autoren</a>.
     </p>
